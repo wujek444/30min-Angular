@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- META: -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- TITLE: -->
+		<title>Learning AngularJS</title>
+		<!-- LINKING ANGULARJS: -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<!-- LINKING BOOTSTRAP CSS: -->
+		<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<!-- LINKING ANGULAR APP FILE: -->
+		<script src="app.js" type="text/javascript"></script>
+		<!-- LINKING ANGULAR APP CONTROLLER FILE: -->
+		<script src="maincontroller.js" type="text/javascript"></script>
+	</head>
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+	<body>
+		<!-- This div is an Angular application -->
+		<div id="content" ng-app="MyTutorialApp" ng-controller="MainController">
+			<!-- FIRST PART OF CONTENT: -->
+			<button class="btn btn-success" ng-click="showFirstContent = !showFirstContent">Pokaż część 1.</button>
+			<div id="firstContent" ng-show="showFirstContent == true">
+				<br/>
+				<div class="input-group">
+					<span class="input-group-addon">Wpisz coś:</span>
+					<!-- zbindowaliśmy pole input ze zmienną $scope.inputValue -->
+					<input type="text" class="form-control" ng-model="inputValue"><br/>
+				</div>
+				<strong>Wpisana wartość:</strong> {{ inputValue }}
+				<br/>
+			</div>
+			<br/>
+			
+			<!-- SECOND PART OF CONTENT -->
+			<button class="btn btn-danger" ng-click="showSecondContent = !showSecondContent"> Pokaż część 2.</button>
+			<div id="secondContent" ng-show="showSecondContent == true">
+				<br/>
+				<select ng-model="selectedPerson" ng-options="person.name for person in people"></select>
+				<select ng-model="selectedGenre">
+					<option ng-repeat="genre in people[selectedPerson.id].music">{{ genre }}</option>
+				</select>
+				<!--ALTERNATIVE WAY OF DOING THE ABOVE: -->
+				<!-- <select ng-model="selectedGenre" ng-options="genre for genre in people[selectedPerson.id].music"></select> -->
+				<br/>
+			</div>
+			<br/>
+
+			<!-- THIRD PART OF CONTENT -->
+			<button class="btn btn-info" ng-click="showThirdContent = !showThirdContent"> Pokaż część 3. </button>
+			<div id="thirdContent" ng-show="showThirdContent == true">
+				<br/>
+				<div class="input-group">
+					<span class="input-group-addon">Wyszukaj:</span>
+					<input type="text" class="form-control" ng-model="searchText">
+				</div>
+				<ul>
+					<li ng-repeat="person in people | filter:searchText"> <strong>ID: </strong>{{person.id}} <strong>NAME: </strong>{{person.name}} <strong>MUSIC GENRES: </strong>{{person.music}}</li>
+				</ul>
+				<br/>
+			</div>
+			<br/>
+			<!-- FOURTH PART OF CONTENT -->
+			<button class="btn btn-warning" ng-click="showFourthContent = !showFourthContent">Pokaż część 4.</button>
+			<div id="fourthContent" ng-show="showFourthContent == true">
+				<br/>
+				<div class="input-group">
+					<span class="input-group-addon">Wyszukaj:</span>
+					<input type="text" class="form-control" ng-model="searchText2">
+				</div>
+				<ul>
+					<li ng-repeat="person in people | filter:searchText2" ng-show="person.live == true"><strong>ID: </strong>{{person.id}} <strong>NAME: </strong>{{person.name}}</li>
+				</ul>
+				<br/>
+			</div>
+			<br/>
+			<!-- FIFTH PART OF CONTENT -->
+			<button class="btn btn-success" ng-click="showFifthContent = !showFifthContent">Pokaż część 5.</button>
+			<div id="fifthContent" ng-show="showFifthContent == true">
+				</br>
+				<div class="input-group">
+					<span class="input-group-addon">Wyszukaj:</span>
+					<input type="text" class="form-control" ng-model="searchText3">
+				</div>
+				<ul>
+					<li ng-repeat="person in people | filter:searchText3" ng-show="person.live == true">
+						<strong>ID: </strong>{{person.id}} <strong>NAME: </strong>{{person.name}}
+					</li>
+				</ul>
+				</br>
+				<div class="input-group">
+					<span class="input-group-addon">Add new person:</span>
+					<input type="text" class="form-control" ng-model="newPerson"/>
+					<button type="button" ng-click="addNew()" class="btn btn-info form-control">ADD</button>
+				</div>
+				</br>
+			</div>
+		</div>
+			
+		
+		
+		<!-- LINKING BOOTSTRAP jQUERY -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- LINKING BOOSTRAP JS -->
+		<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	</body>
+</html>
